@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NotFoundPage from "@/pages/NotFoundPage";
-import { RoutePath } from "./routes/routes";
-import { RootLayout } from "./components/RootLayout";
+import { RoutePath } from "./routes";
+import { RootLayout } from "./components/layout/RootLayout";
 
 const TablePage = lazy(() => import("@/pages/TablePage"));
 const ChartPage = lazy(() => import("@/pages/ChartPage"));

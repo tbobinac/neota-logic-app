@@ -5,7 +5,7 @@ export const RoutePath = {
 
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath];
 
-export const navItems: { to: RoutePath; label: string }[] = [
+export const routes: { to: RoutePath; label: string }[] = [
   { to: RoutePath.table, label: "Table" },
   { to: RoutePath.chart, label: "Chart" },
 ];
