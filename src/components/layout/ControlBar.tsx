@@ -1,24 +1,25 @@
 import { SelectDropdown } from "@/components/dropdowns/SelectDropdown";
+import { AddDataPointDialog } from "@/components/dialogs/AddDataPointDialog";
 import { useDashboardParams } from "@/hooks/useDashboardParams";
 import type { SelectOption } from "@/types/select";
+import { CITIES, REGIONS, SHOW_ALL_ID } from "@/constants/city";
 import { TIME_RANGES } from "@/constants/timeRange";
 import { POLLUTANTS } from "@/constants/pollutant";
-import { CITIES, REGIONS, SHOW_ALL_ID } from "@/constants/city";
 
 const CITY_OPTIONS: SelectOption[] = [
   { value: SHOW_ALL_ID, label: "Show all" },
-  ...REGIONS.map((region) => ({ value: region.id, label: region.name })),
-  ...CITIES.map((city) => ({ value: city.id, label: city.name })),
+  ...REGIONS.map((r): SelectOption => ({ value: r.id, label: r.name })),
+  ...CITIES.map((c): SelectOption => ({ value: c.id, label: c.name })),
 ];
 
-const RANGE_OPTIONS: SelectOption[] = TIME_RANGES.map((timeRange) => ({
-  value: timeRange.id,
-  label: timeRange.label,
+const RANGE_OPTIONS: SelectOption[] = TIME_RANGES.map((r) => ({
+  value: r.id,
+  label: r.label,
 }));
 
-const POLLUTANT_OPTIONS: SelectOption[] = POLLUTANTS.map((pollutant) => ({
-  value: pollutant.id,
-  label: pollutant.label,
+const POLLUTANT_OPTIONS: SelectOption[] = POLLUTANTS.map((p) => ({
+  value: p.id,
+  label: p.label,
 }));
 
 export const ControlBar = () => {
@@ -51,6 +52,9 @@ export const ControlBar = () => {
         onChange={setPollutant}
         className="w-50"
       />
+      <div className="ml-auto">
+        <AddDataPointDialog />
+      </div>
     </div>
   );
 };
