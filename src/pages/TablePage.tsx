@@ -1,5 +1,5 @@
-const TablePage = () => {
-  return "Table";
-};
+import { AirQualityTable } from "@/components/tables/AirQualityTable";
 
-export default TablePage;
+export default function TablePage() {
+  return <AirQualityTable />;
+}
