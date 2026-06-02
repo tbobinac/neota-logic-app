@@ -6,6 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { SelectOption } from "@/types/select";
+import { cn } from "@/lib/utils";
 
 interface SelectDropdownProps {
   label: string;
@@ -26,9 +27,16 @@ export const SelectDropdown = ({
 }: SelectDropdownProps) => {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs text-muted-foreground">{label}</label>
+      <label className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+        {label}
+      </label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className={className}>
+        <SelectTrigger
+          className={cn(
+            "rounded-xl border-transparent bg-muted px-3.5",
+            className,
+          )}
+        >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

@@ -105,10 +105,12 @@ export const EditDataPointForm = ({
           name="cityId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>City</FormLabel>
+              <FormLabel className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                City
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full rounded-xl border-transparent bg-muted">
                     <SelectValue placeholder="Select city" />
                   </SelectTrigger>
                 </FormControl>
@@ -130,10 +132,12 @@ export const EditDataPointForm = ({
           name="pollutantId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Pollutant</FormLabel>
+              <FormLabel className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                Pollutant
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full rounded-xl border-transparent bg-muted">
                     <SelectValue placeholder="Select pollutant" />
                   </SelectTrigger>
                 </FormControl>
@@ -155,7 +159,9 @@ export const EditDataPointForm = ({
           name="datetime"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date & time</FormLabel>
+              <FormLabel className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                Date & time
+              </FormLabel>
               <FormControl>
                 <DateTimePicker
                   value={field.value}
@@ -174,12 +180,14 @@ export const EditDataPointForm = ({
           name="value"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Value (µg/m³)</FormLabel>
+              <FormLabel className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                Value (µg/m³)
+              </FormLabel>
               <FormControl>
                 <Input
                   type="number"
                   step="0.1"
-                  className="w-full"
+                  className="w-full rounded-xl border-transparent bg-muted"
                   placeholder="e.g. 23.5"
                   value={field.value ?? ""}
                   onChange={(e) =>
@@ -196,7 +204,7 @@ export const EditDataPointForm = ({
           )}
         />
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 pt-1">
           <Button
             type="button"
             variant="outline"
@@ -206,7 +214,7 @@ export const EditDataPointForm = ({
             Cancel
           </Button>
           <Button type="submit" className="flex-1">
-            Add point
+            Save
           </Button>
         </div>
       </form>

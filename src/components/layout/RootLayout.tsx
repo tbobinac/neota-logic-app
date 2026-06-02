@@ -5,18 +5,22 @@ import { ControlBar } from "@/components/layout/ControlBar";
 
 export const RootLayout = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="flex items-center gap-6 border-b px-6 py-3">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Wind className="size-4" />
+    <div className="min-h-screen bg-[#f4f6f3]">
+      <header className="mx-auto flex max-w-7xl flex-col gap-4 px-4 pt-6 pb-2 sm:flex-row sm:items-center">
+        <Link to="/" className="flex items-center gap-4">
+          <span className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-sm">
+            <Wind className="size-6" />
           </span>
-          <span className="text-sm font-medium">Air Quality Insights</span>
+          <span className="text-3xl font-semibold tracking-tight">
+            Air Quality Insights
+          </span>
         </Link>
         <NavBar />
       </header>
-      <ControlBar />
-      <main className="p-4">
+      <div className="mx-auto max-w-7xl px-4 py-4">
+        <ControlBar />
+      </div>
+      <main className="mx-auto max-w-7xl px-4 pb-8">
         <Outlet />
       </main>
     </div>

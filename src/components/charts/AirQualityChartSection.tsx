@@ -3,8 +3,11 @@ import { useAirQuality } from "@/hooks/useAirQuality";
 import {
   getCityPollutionByDay,
   getCityAveragePollutionByDay,
+  getMergedDailyRows,
+  getPollutionSummary,
 } from "@/lib/airQuality";
 import { Spinner } from "@/components/ui/spinner";
+import { SummaryCards } from "@/components/summary/SummaryCards";
 import { AirQualityChart } from "@/components/charts/AirQualityChart";
 import { DisplayError } from "@/components/errors/DisplayError";
 
@@ -29,6 +32,8 @@ export const AirQualityChartSection = () => {
     return <DisplayError action={refetch} />;
   }
 
+  const summary = getPollutionSummary(getMergedDailyRows(data.results));
+
   const perCityDaily = data.results.map((res) =>
     getCityAveragePollutionByDay(getCityPollutionByDay(res)),
   );
@@ -45,6 +50,12 @@ export const AirQualityChartSection = () => {
   });
 
   return (
-    <AirQualityChart data={chartData} cities={data.cities.map((c) => c.name)} />
+    <div className="flex flex-col gap-4">
+      <SummaryCards summary={summary} />
+      <AirQualityChart
+        data={chartData}
+        cities={data.cities.map((c) => c.name)}
+      />
+    </div>
   );
 };

@@ -1,10 +1,6 @@
 import { useDashboardParams } from "@/hooks/useDashboardParams";
 import { useAirQuality } from "@/hooks/useAirQuality";
-import {
-  getCityPollutionByDay,
-  getPollutionSummary,
-  mergeCitiesPollutions,
-} from "@/lib/airQuality";
+import { getMergedDailyRows, getPollutionSummary } from "@/lib/airQuality";
 import { Spinner } from "@/components/ui/spinner";
 import { SummaryCards } from "@/components/summary/SummaryCards";
 import { AirQualityTable } from "@/components/tables/AirQualityTable";
@@ -32,13 +28,7 @@ export const AirQualityTableSection = () => {
     return <DisplayError action={refetch} />;
   }
 
-  const pollutions =
-    data.results.length === 1
-      ? data.results[0]
-      : mergeCitiesPollutions(data.results);
-
-  const rows = getCityPollutionByDay(pollutions);
-
+  const rows = getMergedDailyRows(data.results);
   const summary = getPollutionSummary(rows);
 
   return (

@@ -8,16 +8,18 @@ interface SummaryCardsProps {
 
 export const SummaryCards = ({ summary }: SummaryCardsProps) => {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <SummaryCard label="Average" value={summary.average} />
       <SummaryCard
-        label={`Peak · ${formatDateTime(summary.max.date, summary.max.hour)}`}
+        label="Peak"
         value={summary.max.value}
+        caption={formatDateTime(summary.max.date, summary.max.hour)}
         variant="negative"
       />
       <SummaryCard
-        label={`Cleanest · ${formatDateTime(summary.min.date, summary.min.hour)}`}
+        label="Cleanest"
         value={summary.min.value}
+        caption={formatDateTime(summary.min.date, summary.min.hour)}
         variant="positive"
       />
     </div>

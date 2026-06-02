@@ -97,3 +97,11 @@ export const getPollutionSummary = (
     max: max ? { ...max, value: round(max.value) } : empty,
   };
 };
+
+export const getMergedDailyRows = (
+  results: CityPollution[],
+): DailyPollution[] => {
+  const pollutions =
+    results.length === 1 ? results[0] : mergeCitiesPollutions(results);
+  return getCityPollutionByDay(pollutions);
+};

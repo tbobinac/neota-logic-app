@@ -57,7 +57,7 @@ export const DateTimePicker = ({
           type="button"
           variant="outline"
           className={cn(
-            "w-full justify-start font-normal",
+            "w-full justify-start rounded-xl border-transparent bg-muted font-normal hover:bg-muted/80",
             !value && "text-muted-foreground",
           )}
         >

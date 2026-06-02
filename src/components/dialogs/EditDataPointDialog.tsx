@@ -27,9 +27,11 @@ export const EditDataPointDialog = ({
           Edit data point
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="rounded-3xl p-6 sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Edit data point</DialogTitle>
+          <DialogTitle className="text-xl font-semibold tracking-tight">
+            Edit data point
+          </DialogTitle>
         </DialogHeader>
         <EditDataPointForm
           onSuccess={() => setOpen(false)}

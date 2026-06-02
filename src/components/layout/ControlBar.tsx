@@ -26,15 +26,15 @@ export const ControlBar = () => {
     useDashboardParams();
 
   return (
-    <div className="flex flex-col gap-3 border-b px-4 py-3 xs:flex-row xs:items-start min-[840px]:items-end">
-      <div className="flex flex-col gap-3 min-[840px]:flex-row min-[840px]:items-end">
+    <div className="flex flex-col gap-4 rounded-2xl bg-card p-4 shadow-sm xs:flex-row xs:items-end">
+      <div className="flex flex-1 flex-col gap-3 min-[900px]:flex-row min-[900px]:items-end">
         <SelectDropdown
           label="City"
           placeholder="Select city"
           options={CITY_OPTIONS}
           value={city}
           onChange={setCity}
-          className="w-full xs:w-50"
+          className="w-full min-[900px]:w-50"
         />
         <SelectDropdown
           label="Time range"
@@ -42,7 +42,7 @@ export const ControlBar = () => {
           options={RANGE_OPTIONS}
           value={range}
           onChange={setRange}
-          className="w-full xs:w-50"
+          className="w-full min-[900px]:w-50"
         />
         <SelectDropdown
           label="Pollutant"
@@ -50,10 +50,10 @@ export const ControlBar = () => {
           options={POLLUTANT_OPTIONS}
           value={pollutant}
           onChange={setPollutant}
-          className="w-full xs:w-50"
+          className="w-full min-[900px]:w-50"
         />
       </div>
-      <EditDataPointDialog className="mt-auto w-full xs:ml-auto xs:w-auto" />
+      <EditDataPointDialog className="w-full px-5 xs:ml-auto xs:w-auto" />
     </div>
   );
 };

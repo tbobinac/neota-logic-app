@@ -9,6 +9,7 @@ import {
 import type { DailyPollution } from "@/lib/airQuality";
 import { formatTableShortDate } from "@/lib/date";
 import { avg, round } from "@/lib/math";
+import { cn } from "@/lib/utils";
 
 const BLOCKS = [
   { label: "0-4", hours: [0, 1, 2, 3] },
@@ -35,18 +36,18 @@ export const AirQualityBlockTable = ({ rows }: AirQualityBlockTableProps) => {
 
   return (
     <Table
-      containerClassName="max-h-[600px] rounded-lg border"
+      containerClassName="max-h-[600px] rounded-2xl border bg-card shadow-sm"
       className="table-fixed"
     >
       <TableHeader>
-        <TableRow>
-          <TableHead className="sticky top-0 z-10 bg-green-100 text-foreground">
+        <TableRow className="hover:bg-transparent">
+          <TableHead className="sticky top-0 z-10 border-b border-border bg-card shadow-[inset_0_-1px_0_0_var(--border)] font-semibold text-foreground">
             Date
           </TableHead>
           {BLOCKS.map((b) => (
             <TableHead
               key={b.label}
-              className="sticky top-0 z-10 bg-green-100 text-center text-foreground"
+              className="sticky top-0 z-10 border-b border-border bg-card shadow-[inset_0_-1px_0_0_var(--border)] text-center font-normal text-muted-foreground"
             >
               {b.label}
             </TableHead>
@@ -55,23 +56,21 @@ export const AirQualityBlockTable = ({ rows }: AirQualityBlockTableProps) => {
       </TableHeader>
       <TableBody>
         {blockRows.map((row, i) => (
-          <TableRow key={row.date} className={i % 2 ? "bg-muted/40" : ""}>
-            <TableCell className="whitespace-nowrap font-medium">
+          <TableRow key={row.date} className={i % 2 ? "bg-muted/30" : ""}>
+            <TableCell className="whitespace-nowrap font-semibold">
               {formatTableShortDate(row.date)}
             </TableCell>
             {row.blocks.map((v, idx) => {
               const isMin = v === min;
               const isMax = v === max;
               return (
-                <TableCell key={idx} className="p-1">
+                <TableCell key={idx} className="p-1.5 text-center tabular-nums">
                   <span
-                    className={`flex items-center justify-center rounded py-1 ${
-                      isMin
-                        ? "bg-green-100 font-medium text-green-800"
-                        : isMax
-                          ? "bg-red-100 font-medium text-red-800"
-                          : ""
-                    }`}
+                    className={cn(
+                      "flex items-center justify-center rounded-lg py-1",
+                      isMin && "bg-emerald-600 font-semibold text-white",
+                      isMax && "bg-red-600 font-semibold text-white",
+                    )}
                   >
                     {v}
                   </span>
