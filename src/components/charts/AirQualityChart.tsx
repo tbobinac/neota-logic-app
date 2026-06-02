@@ -20,8 +20,8 @@ export const AirQualityChart = ({ data, cities }: AirQualityChartProps) => {
   const showLegend = cities.length > 1;
 
   return (
-    <div className="h-125 w-full rounded-lg border p-4">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full rounded-lg border p-4">
+      <ResponsiveContainer width="100%" height={500}>
         <BarChart data={data} margin={{ top: 8, right: 8, bottom: 8, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis

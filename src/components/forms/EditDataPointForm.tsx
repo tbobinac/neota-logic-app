@@ -20,33 +20,37 @@ import { Button } from "@/components/ui/button";
 import { CITIES } from "@/constants/city";
 import { POLLUTANTS } from "@/constants/pollutant";
 import { getAllowedDateRange } from "@/lib/date";
+import { useDashboardParams } from "@/hooks/useDashboardParams";
+import { DateTimePicker } from "@/components/forms/DateTimePicker";
 import {
-  newDataPointSchema,
-  type NewDataPointForm as NewDataPointFormValues,
-} from "@/validations/newDataPoint";
+  editDataPointSchema,
+  type EditDataPointForm as EditDataPointFormValues,
+} from "@/validations/editDataPoint";
 
-interface NewDataPointFormProps {
+interface EditDataPointFormProps {
   onSuccess: () => void;
   onCancel: () => void;
 }
 
-export const NewDataPointForm = ({
+export const EditDataPointForm = ({
   onSuccess,
   onCancel,
-}: NewDataPointFormProps) => {
-  const dateRange = getAllowedDateRange();
+}: EditDataPointFormProps) => {
+  const { city, pollutant, rangeValue } = useDashboardParams();
 
-  const form = useForm<NewDataPointFormValues>({
-    resolver: zodResolver(newDataPointSchema),
+  const dateRange = getAllowedDateRange(rangeValue);
+
+  const form = useForm<EditDataPointFormValues>({
+    resolver: zodResolver(editDataPointSchema),
     defaultValues: {
-      cityId: "",
-      pollutantId: "",
+      cityId: CITIES.some((c) => c.id === city) ? city : "",
+      pollutantId: POLLUTANTS.some((p) => p.id === pollutant) ? pollutant : "",
       datetime: "",
       value: undefined,
     },
   });
 
-  const onSubmit = (values: NewDataPointFormValues) => {
+  const onSubmit = (values: EditDataPointFormValues) => {
     console.log("data point:", values);
     onSuccess();
     form.reset();
@@ -115,12 +119,11 @@ export const NewDataPointForm = ({
             <FormItem>
               <FormLabel>Date & time</FormLabel>
               <FormControl>
-                <Input
-                  type="datetime-local"
-                  className="w-full"
+                <DateTimePicker
+                  value={field.value}
+                  onChange={field.onChange}
                   min={dateRange.min}
                   max={dateRange.max}
-                  {...field}
                 />
               </FormControl>
               <FormMessage />

@@ -8,24 +8,30 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { NewDataPointForm } from "@/components/forms/NewDataPointForm";
+import { EditDataPointForm } from "@/components/forms/EditDataPointForm";
 
-export const AddDataPointDialog = () => {
+interface EditDataPointDialogProps {
+  className?: string;
+}
+
+export const EditDataPointDialog = ({
+  className,
+}: EditDataPointDialogProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className={className}>
           <Plus className="size-4" />
-          Add data point
+          Edit data point
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>Add data point</DialogTitle>
+          <DialogTitle>Edit data point</DialogTitle>
         </DialogHeader>
-        <NewDataPointForm
+        <EditDataPointForm
           onSuccess={() => setOpen(false)}
           onCancel={() => setOpen(false)}
         />
