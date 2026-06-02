@@ -1,5 +1,5 @@
 import { SelectDropdown } from "@/components/dropdowns/SelectDropdown";
-import { AddDataPointDialog } from "@/components/dialogs/AddDataPointDialog";
+import { EditDataPointDialog } from "@/components/dialogs/EditDataPointDialog";
 import { useDashboardParams } from "@/hooks/useDashboardParams";
 import type { SelectOption } from "@/types/select";
 import { CITIES, REGIONS } from "@/constants/city";
@@ -26,34 +26,34 @@ export const ControlBar = () => {
     useDashboardParams();
 
   return (
-    <div className="flex flex-wrap items-end gap-3 border-b px-4 py-3">
-      <SelectDropdown
-        label="City"
-        placeholder="Select city"
-        options={CITY_OPTIONS}
-        value={city}
-        onChange={setCity}
-        className="w-50"
-      />
-      <SelectDropdown
-        label="Time range"
-        placeholder="Select range"
-        options={RANGE_OPTIONS}
-        value={range}
-        onChange={setRange}
-        className="w-50"
-      />
-      <SelectDropdown
-        label="Pollutant"
-        placeholder="Select pollutant"
-        options={POLLUTANT_OPTIONS}
-        value={pollutant}
-        onChange={setPollutant}
-        className="w-50"
-      />
-      <div className="ml-auto">
-        <AddDataPointDialog />
+    <div className="flex flex-col gap-3 border-b px-4 py-3 xs:flex-row xs:items-start min-[840px]:items-end">
+      <div className="flex flex-col gap-3 min-[840px]:flex-row min-[840px]:items-end">
+        <SelectDropdown
+          label="City"
+          placeholder="Select city"
+          options={CITY_OPTIONS}
+          value={city}
+          onChange={setCity}
+          className="w-full xs:w-50"
+        />
+        <SelectDropdown
+          label="Time range"
+          placeholder="Select range"
+          options={RANGE_OPTIONS}
+          value={range}
+          onChange={setRange}
+          className="w-full xs:w-50"
+        />
+        <SelectDropdown
+          label="Pollutant"
+          placeholder="Select pollutant"
+          options={POLLUTANT_OPTIONS}
+          value={pollutant}
+          onChange={setPollutant}
+          className="w-full xs:w-50"
+        />
       </div>
+      <EditDataPointDialog className="mt-auto w-full xs:ml-auto xs:w-auto" />
     </div>
   );
 };
