@@ -55,4 +55,9 @@ export const CITIES: City[] = [
   },
 ] as const;
 
-export const SHOW_ALL_ID = "all";
+export const getSelectedCities = (selection: string): City[] => {
+  if (REGIONS.some((r) => r.id === selection)) {
+    return CITIES.filter((c) => c.regionId === selection);
+  }
+  return CITIES.filter((c) => c.id === selection);
+};

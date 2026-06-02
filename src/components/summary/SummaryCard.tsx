@@ -14,6 +14,7 @@ export const SummaryCard = ({ label, value, variant }: SummaryCardProps) => {
       : variant === SummaryCardVariant.positive
         ? "text-green-700"
         : "";
+
   return (
     <div className="rounded-md bg-muted px-4 py-3">
       <div className="text-xs text-muted-foreground">{label}</div>

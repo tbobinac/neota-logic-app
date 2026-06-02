@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CITIES } from "@/constants/city";
 import { POLLUTANTS } from "@/constants/pollutant";
-import { getAllowedDateRange } from "@/libs/date";
+import { getAllowedDateRange } from "@/lib/date";
 import {
   newDataPointSchema,
   type NewDataPointForm as NewDataPointFormValues,

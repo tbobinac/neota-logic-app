@@ -1,5 +1,5 @@
-import { AirQualityTable } from "@/components/tables/AirQualityTable";
+import { AirQualityTableSection } from "@/components/tables/AirQualityTableSection";
 
 export default function TablePage() {
-  return <AirQualityTable />;
+  return <AirQualityTableSection />;
 }

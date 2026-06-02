@@ -2,17 +2,16 @@ import { SelectDropdown } from "@/components/dropdowns/SelectDropdown";
 import { AddDataPointDialog } from "@/components/dialogs/AddDataPointDialog";
 import { useDashboardParams } from "@/hooks/useDashboardParams";
 import type { SelectOption } from "@/types/select";
-import { CITIES, REGIONS, SHOW_ALL_ID } from "@/constants/city";
-import { TIME_RANGES } from "@/constants/timeRange";
+import { CITIES, REGIONS } from "@/constants/city";
+import { DATE_RANGES } from "@/constants/dateRange";
 import { POLLUTANTS } from "@/constants/pollutant";
 
 const CITY_OPTIONS: SelectOption[] = [
-  { value: SHOW_ALL_ID, label: "Show all" },
   ...REGIONS.map((r): SelectOption => ({ value: r.id, label: r.name })),
   ...CITIES.map((c): SelectOption => ({ value: c.id, label: c.name })),
 ];
 
-const RANGE_OPTIONS: SelectOption[] = TIME_RANGES.map((r) => ({
+const RANGE_OPTIONS: SelectOption[] = DATE_RANGES.map((r) => ({
   value: r.id,
   label: r.label,
 }));

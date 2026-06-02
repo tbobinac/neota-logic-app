@@ -1,7 +1,7 @@
-import { AirQualityChart } from "@/components/charts/AirQualityChart";
+import { AirQualityChartSection } from "@/components/charts/AirQualityChartSection";
 
 const ChartPage = () => {
-  return <AirQualityChart />;
+  return <AirQualityChartSection />;
 };
 
 export default ChartPage;
