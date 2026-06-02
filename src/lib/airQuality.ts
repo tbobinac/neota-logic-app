@@ -30,12 +30,21 @@ export interface CityPollution {
 export const mergeCitiesPollutions = (
   citiesPollutions: CityPollution[],
 ): CityPollution => {
-  const { timestamps } = citiesPollutions[0];
+  const first = citiesPollutions[0];
+  if (!first) return { timestamps: [], values: [] };
+
+  const { timestamps } = first;
 
   return {
     timestamps,
     values: timestamps.map((_, i) =>
-      round(avg(citiesPollutions.map((pollution) => pollution.values[i]))),
+      round(
+        avg(
+          citiesPollutions
+            .map((pollution) => pollution.values[i])
+            .filter((value): value is number => value !== undefined),
+        ),
+      ),
     ),
   };
 };
@@ -52,7 +61,7 @@ export const getCityPollutionByDay = (
     if (!byDate.has(date)) {
       byDate.set(date, Array(24).fill(0));
     }
-    byDate.get(date)![hour] = round(cityPollution.values[i]);
+    byDate.get(date)![hour] = round(cityPollution.values[i] ?? 0);
   });
 
   return Array.from(byDate.entries()).map(([date, hourly]) => ({
@@ -103,5 +112,5 @@ export const getMergedDailyRows = (
 ): DailyPollution[] => {
   const pollutions =
     results.length === 1 ? results[0] : mergeCitiesPollutions(results);
-  return getCityPollutionByDay(pollutions);
+  return pollutions ? getCityPollutionByDay(pollutions) : [];
 };

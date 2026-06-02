@@ -9,24 +9,28 @@ interface SummaryCardProps {
   variant?: SummaryCardVariant;
 }
 
-const VARIANTS: Record<string, { border: string; dot: string; label: string }> =
-  {
-    [SummaryCardVariant.positive]: {
-      border: "border-l-emerald-500",
-      dot: "bg-emerald-500",
-      label: "text-emerald-700",
-    },
-    [SummaryCardVariant.negative]: {
-      border: "border-l-red-600",
-      dot: "bg-red-600",
-      label: "text-red-600",
-    },
-    neutral: {
-      border: "border-l-blue-500",
-      dot: "bg-blue-500",
-      label: "text-blue-700",
-    },
-  };
+type SummaryCardTone = SummaryCardVariant;
+
+const VARIANTS: Record<
+  SummaryCardTone,
+  { border: string; dot: string; label: string }
+> = {
+  [SummaryCardVariant.positive]: {
+    border: "border-l-emerald-500",
+    dot: "bg-emerald-500",
+    label: "text-emerald-700",
+  },
+  [SummaryCardVariant.negative]: {
+    border: "border-l-red-600",
+    dot: "bg-red-600",
+    label: "text-red-600",
+  },
+  [SummaryCardVariant.neutral]: {
+    border: "border-l-blue-500",
+    dot: "bg-blue-500",
+    label: "text-blue-700",
+  },
+};
 
 export const SummaryCard = ({
   label,

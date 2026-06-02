@@ -43,7 +43,7 @@ export const AirQualityChartSection = () => {
   const chartData = chartDates.map((date, i) => {
     const row: Record<string, string | number> = { date };
     data.cities.forEach((city, j) => {
-      row[city.name] = perCityDaily[j][i]?.value ?? 0;
+      row[city.name] = perCityDaily[j]?.[i]?.value ?? 0;
     });
 
     return row;

@@ -1,7 +1,6 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { jsonFetch } from "@/lib/jsonFetch";
 import { getSelectedCities } from "@/constants/city";
-import { BASE_URL } from "@/constants/api";
 import type { PollutantValue } from "@/enums/pollutant";
 import type { City } from "@/types/city";
 import type { CityPollution } from "@/lib/airQuality";
@@ -44,7 +43,7 @@ export const useAirQuality = ({
       });
 
       const data = await jsonFetch<AirQualityResponse | AirQualityResponse[]>(
-        `${BASE_URL}/v1/air-quality?${params}`,
+        `${import.meta.env.VITE_API_URL}/v1/air-quality?${params}`,
       );
 
       const raw = Array.isArray(data) ? data : [data];

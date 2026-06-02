@@ -1,4 +1,5 @@
 import { SummaryCard } from "@/components/summary/SummaryCard";
+import { SummaryCardVariant } from "@/enums/summary";
 import type { PollutionSummary } from "@/lib/airQuality";
 import { formatDateTime } from "@/lib/date";
 
@@ -14,13 +15,13 @@ export const SummaryCards = ({ summary }: SummaryCardsProps) => {
         label="Peak"
         value={summary.max.value}
         caption={formatDateTime(summary.max.date, summary.max.hour)}
-        variant="negative"
+        variant={SummaryCardVariant.negative}
       />
       <SummaryCard
         label="Cleanest"
         value={summary.min.value}
         caption={formatDateTime(summary.min.date, summary.min.hour)}
-        variant="positive"
+        variant={SummaryCardVariant.positive}
       />
     </div>
   );

@@ -74,6 +74,8 @@ export const EditDataPointForm = ({
       if (cityIndex === -1) return;
 
       const result = data.results[cityIndex];
+      if (!result) return;
+
       const hourIndex = result.timestamps.indexOf(values.datetime);
       if (hourIndex === -1) return;
 

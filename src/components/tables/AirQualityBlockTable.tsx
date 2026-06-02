@@ -27,7 +27,7 @@ interface AirQualityBlockTableProps {
 export const AirQualityBlockTable = ({ rows }: AirQualityBlockTableProps) => {
   const blockRows = rows.map((row) => ({
     date: row.date,
-    blocks: BLOCKS.map((b) => round(avg(b.hours.map((h) => row.hourly[h])))),
+    blocks: BLOCKS.map((b) => round(avg(b.hours.map((h) => row.hourly[h] ?? 0)))),
   }));
 
   const allBlockValues = blockRows.flatMap((r) => r.blocks);

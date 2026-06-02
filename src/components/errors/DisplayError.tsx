@@ -1,11 +1,11 @@
 import { TriangleAlertIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
-interface DisplayError {
+interface DisplayErrorProps {
   action: () => void;
 }
 
-export const DisplayError = ({ action }: DisplayError) => {
+export const DisplayError = ({ action }: DisplayErrorProps) => {
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-center">
       <TriangleAlertIcon className="size-8 text-destructive" />
