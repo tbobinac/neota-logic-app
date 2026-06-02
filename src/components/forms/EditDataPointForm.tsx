@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -26,6 +28,7 @@ import {
   editDataPointSchema,
   type EditDataPointForm as EditDataPointFormValues,
 } from "@/validations/editDataPoint";
+import type { AirQualityData } from "@/hooks/useAirQuality";
 
 interface EditDataPointFormProps {
   onSuccess: () => void;
@@ -36,9 +39,10 @@ export const EditDataPointForm = ({
   onSuccess,
   onCancel,
 }: EditDataPointFormProps) => {
-  const { city, pollutant, rangeValue } = useDashboardParams();
+  const { city, pollutant } = useDashboardParams();
+  const queryClient = useQueryClient();
 
-  const dateRange = getAllowedDateRange(rangeValue);
+  const dateRange = getAllowedDateRange();
 
   const form = useForm<EditDataPointFormValues>({
     resolver: zodResolver(editDataPointSchema),
@@ -51,7 +55,41 @@ export const EditDataPointForm = ({
   });
 
   const onSubmit = (values: EditDataPointFormValues) => {
-    console.log("data point:", values);
+    const pollutantValue = POLLUTANTS.find(
+      (pollutant) => pollutant.id === values.pollutantId,
+    )?.value;
+
+    const queries = queryClient.getQueriesData<AirQualityData>({
+      queryKey: ["airQuality"],
+    });
+
+    queries.forEach(([key, data]) => {
+      if (!data) return;
+      if (key[2] !== pollutantValue) return;
+
+      const cityIndex = data.cities.findIndex(
+        (city) => city.id === values.cityId,
+      );
+
+      if (cityIndex === -1) return;
+
+      const result = data.results[cityIndex];
+      const hourIndex = result.timestamps.indexOf(values.datetime);
+      if (hourIndex === -1) return;
+
+      const updatedValues = [...result.values];
+      updatedValues[hourIndex] = values.value;
+
+      const updatedResults = [...data.results];
+      updatedResults[cityIndex] = { ...result, values: updatedValues };
+
+      queryClient.setQueryData<AirQualityData>(key, {
+        ...data,
+        results: updatedResults,
+      });
+    });
+
+    toast.success("Data point saved");
     onSuccess();
     form.reset();
   };

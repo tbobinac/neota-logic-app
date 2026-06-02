@@ -1,9 +1,23 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { jsonFetch } from "@/lib/jsonFetch";
 import { getSelectedCities } from "@/constants/city";
-import type { AirQualityResponse } from "@/types/airQuality";
 import { BASE_URL } from "@/constants/api";
 import type { PollutantValue } from "@/enums/pollutant";
+import type { City } from "@/types/city";
+import type { CityPollution } from "@/lib/airQuality";
+
+export interface AirQualityResponse {
+  latitude: number;
+  longitude: number;
+  hourly: {
+    time: string[];
+  } & Partial<Record<PollutantValue, number[]>>;
+}
+
+export interface AirQualityData {
+  cities: City[];
+  results: CityPollution[];
+}
 
 interface UseAirQualityParams {
   city: string;
@@ -20,7 +34,7 @@ export const useAirQuality = ({
 
   return useQuery({
     queryKey: ["airQuality", city, pollutant, range],
-    queryFn: async () => {
+    queryFn: async (): Promise<AirQualityData> => {
       const params = new URLSearchParams({
         latitude: cities.map((c) => c.latitude).join(","),
         longitude: cities.map((c) => c.longitude).join(","),

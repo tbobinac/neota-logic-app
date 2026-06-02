@@ -1,10 +1,12 @@
-import { subDays, format } from "date-fns";
+import { subDays, startOfDay, endOfDay, format } from "date-fns";
 
-export const getAllowedDateRange = (rangeDays: number) => {
+const MAX_RANGE_DAYS = 90;
+
+export const getAllowedDateRange = () => {
   const now = new Date();
   return {
-    min: subDays(now, rangeDays),
-    max: now,
+    min: startOfDay(subDays(now, MAX_RANGE_DAYS)),
+    max: endOfDay(subDays(now, 1)),
   };
 };
 

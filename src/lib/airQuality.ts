@@ -22,7 +22,7 @@ export interface PollutionSummary {
   max: PollutionPoint;
 }
 
-interface CityPollution {
+export interface CityPollution {
   timestamps: string[];
   values: number[];
 }
