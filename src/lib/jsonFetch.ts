@@ -1,5 +1,7 @@
-export const jsonFetch = async <T>(url: string | URL): Promise<T> => {
-  const res = await fetch(url);
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+export const jsonFetch = async <T>(path: string): Promise<T> => {
+  const res = await fetch(`${BASE_URL}${path}`);
   if (!res.ok) {
     throw new Error(`Request failed: ${res.status}`);
   }

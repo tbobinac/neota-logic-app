@@ -43,7 +43,7 @@ export const useAirQuality = ({
       });
 
       const data = await jsonFetch<AirQualityResponse | AirQualityResponse[]>(
-        `${import.meta.env.VITE_API_URL}/v1/air-quality?${params}`,
+        `/v1/air-quality?${params}`,
       );
 
       const raw = Array.isArray(data) ? data : [data];
