@@ -4,11 +4,11 @@ A responsive dashboard for exploring historical air quality across Western Balka
 
 ## Features
 
-- **Table view** — hourly pollutant concentrations per day, with the cleanest and peak values highlighted; switches to a compact 4-hour block table on smaller screens
-- **Chart view** — daily average concentrations as a bar chart, with a per-city breakdown when "Western Balkans" is selected
-- **Summary cards** — average, peak and cleanest readings for the selected period
-- **Filters** — city, time range (7/14/30/90 days) and pollutant (PM2.5, PM10, O₃, NO₂, SO₂), all synced to URL search params so views are shareable
-- **Edit data point** — adjust an individual hourly reading through a validated form (updates the local query cache; the upstream API is read-only, so edits are not persisted across reloads)
+- **Table view** - hourly pollutant concentrations per day, with the cleanest and peak values highlighted; switches to a compact 4-hour block table on smaller screens
+- **Chart view** - daily average concentrations as a bar chart, with a per-city breakdown when "Western Balkans" is selected
+- **Summary cards** - average, peak and cleanest readings for the selected period
+- **Filters** - city, time range (7/14/30/90 days) and pollutant (PM2.5, PM10, O₃, NO₂, SO₂), all synced to URL search params so views are shareable
+- **Edit data point** - adjust an individual hourly reading through a validated form (updates the local query cache; the upstream API is read-only, so edits are not persisted across reloads)
 
 ## Tech stack
 
