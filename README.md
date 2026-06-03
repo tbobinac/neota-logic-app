@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Air Quality Insights
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive dashboard for exploring historical air quality across Western Balkans capitals (Zagreb, Ljubljana, Belgrade, Sarajevo, Podgorica, Skopje), powered by the [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Table view** — hourly pollutant concentrations per day, with the cleanest and peak values highlighted; switches to a compact 4-hour block table on smaller screens
+- **Chart view** — daily average concentrations as a bar chart, with a per-city breakdown when "Western Balkans" is selected
+- **Summary cards** — average, peak and cleanest readings for the selected period
+- **Filters** — city, time range (7/14/30/90 days) and pollutant (PM2.5, PM10, O₃, NO₂, SO₂), all synced to URL search params so views are shareable
+- **Edit data point** — adjust an individual hourly reading through a validated form (updates the local query cache; the upstream API is read-only, so edits are not persisted across reloads)
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org) + [Vite](https://vite.dev)
+- [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+- [TanStack Query](https://tanstack.com/query) for data fetching
+- [React Router 7](https://reactrouter.com) for routing
+- [react-hook-form](https://react-hook-form.com) + [Zod](https://zod.dev) for form validation
+- [Recharts](https://recharts.org) for charts
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```bash
+   git clone https://github.com/tbobinac/neota-logic-app.git
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Navigate to the project directory:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   ```bash
+   cd neota-logic-app
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+
+   Create a `.env` file in the root of the project and add the following variables:
+
+   ```
+   VITE_API_URL=<your_api_base_url>
+   ```
+
+   Replace `<your_api_base_url>` with the appropriate value (e.g. `https://air-quality-api.open-meteo.com`).
+
+5. Start the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open the app in your browser:
+
+   ```
+   http://localhost:5173
+   ```
+
+## Project structure
+
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+src/
+├── components/      # UI building blocks
+│   ├── charts/      #   chart view + section
+│   ├── tables/      #   hourly & block tables + section
+│   ├── summary/     #   summary cards
+│   ├── forms/       #   edit data point form, date-time picker
+│   ├── layout/      #   header, nav, control bar
+│   └── ui/          #   shadcn/ui primitives
+├── hooks/           # useAirQuality (fetching), useDashboardParams (URL state)
+├── lib/             # data transforms (airQuality), date/math/fetch helpers
+├── constants/       # cities, pollutants, time ranges, chart colors
+├── enums/           # const-object enums (pollutant, date range, ...)
+├── types/           # shared type definitions
+├── validations/     # zod schemas
+└── pages/           # route pages (Table, Chart, NotFound)
 ```
